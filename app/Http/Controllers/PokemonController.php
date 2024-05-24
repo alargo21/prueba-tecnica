@@ -28,9 +28,9 @@ class PokemonController extends Controller
                 'name' => $pokemonData['name'],
                 'types' => array_map(fn($type) => $type['type']['name'], $pokemonData['types']),
                 'image' => $pokemonData['sprites']['front_default'],
-                'stats' => array_reduce($pokemonData['stats'], function ($carry, $stat) {
-                    $carry[$stat['stat']['name']] = $stat['base_stat'];
-                    return $carry;
+                'stats' => array_reduce($pokemonData['stats'], function ($finalStat, $stat) {
+                    $finalStat[$stat['stat']['name']] = $stat['base_stat'];
+                    return $finalStat;
                 }, [])
             ];
         }
